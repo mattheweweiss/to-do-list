@@ -1,5 +1,6 @@
-from flask import Flask
 from routes.data import to_do_list
+
+from flask import Flask
 
 app = Flask(__name__)
 app.register_blueprint(to_do_list)
