@@ -1,0 +1,53 @@
+body {
+    background-color: #2081C3;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+.login-container {
+    width: 25em;
+
+    margin: 10em auto 0;
+    border-radius: 10px;
+    padding: 1em;
+    box-shadow: 2px 1px 5px #303030;
+
+    background-color: #f1f1f9;
+
+    color: #101935;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-input {
+    margin: 1.2em 0;
+    border: none;
+    border-bottom: 1px solid #bfbfc7;
+
+    font-size: 1.2em;
+    font-family: inherit;
+    color: inherit;
+}
+
+.login-button {
+    width: 10em;
+    height: 2em;
+
+    margin: 2em 0;
+    border: none;
+    border-radius: 5px;
+
+    background-color: #5FBB97;
+
+    font-size: 1em;
+    font-family: inherit;
+    color: inherit;
+
+    cursor: pointer;
+}
