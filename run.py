@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import os
 
 
-load_dotenv(override=True)
+load_dotenv()
 
 port = os.environ.get("PORT")
 # Converts to integer

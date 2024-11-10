@@ -6,14 +6,51 @@ import requests
 auth = Blueprint("auth", __name__, template_folder='templates')
 
 
+
+
 # Route for login page
-@auth.route('/login', methods=["GET", "POST"])
-def login_page():
+@auth.route('/login', methods=["POST"])
+def login():
 
-    if request.method == "POST":
-        return redirect(url_for("to_do_list.homepage"))
+    try:
 
-    return render_template('login.html')
+        # Raises exception if a field isn't found
+        if not request.form.get("email") or not request.form.get("password"):
+            raise Exception("Missing field(s)")
+        
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+
+        user_body = {
+            "email": email,
+            "password": password
+        }
+
+        
+        # Login endpoint in application password manager
+        login_endpoint = os.environ.get("LOGIN_ENDPOINT")
+
+
+        # Sends request to endpoint in application password manager
+        # Endpoint retrieves user from database and decrypts password hash to match to user input
+        result = requests.get(login_endpoint, json = user_body)
+        
+        # Converts byte response to string
+        result = result.content.decode()
+
+
+        # If result is true, user is authenticated
+        if result == "true":
+            return redirect(url_for("to_do_list.homepage"))
+        else:
+            return render_template('login.html')
+
+    except Exception as e:
+        print(e)
+        return render_template('login.html')
+
+    
 
 
 
