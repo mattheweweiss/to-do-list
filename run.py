@@ -14,6 +14,7 @@ port = int(port)
 
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY")
 app.register_blueprint(auth)
 app.register_blueprint(to_do_list)
 

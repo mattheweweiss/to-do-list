@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, jsonify
+from flask import Blueprint, request, render_template, redirect, url_for, session
 import os
 import requests
 
@@ -18,6 +18,8 @@ def login():
         if not request.form.get("email") or not request.form.get("password"):
             raise Exception("Missing field(s)")
         
+
+        # Getting fields from form
         email = request.form.get("email")
         password = request.form.get("password")
 
@@ -41,7 +43,8 @@ def login():
 
 
         # If result is true, user is authenticated
-        if result == "true":
+        if result != "false":
+            session["user_id"] = result
             return redirect(url_for("to_do_list.homepage"))
         else:
             return render_template('login.html')
