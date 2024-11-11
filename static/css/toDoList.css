@@ -87,3 +87,124 @@ body {
 
     cursor: pointer;
 }
+
+
+.add-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+
+    margin: 2em;
+}
+
+
+.add-fields-button {
+    z-index: 1;
+
+    margin: 0;
+    border: none;
+    padding: 0;
+
+    background: none;
+}
+
+
+.add-icon {
+    height: 9em;
+    width: auto;
+
+    cursor: pointer;
+
+    transition: all 600ms ease-in-out 100ms;
+}
+
+
+@keyframes bobble {
+    12.5% {
+        transform: rotate(50deg);
+    }
+
+    37.5% {
+        transform: rotate(-40deg);
+    }
+
+    62.5% {
+        transform: rotate(25deg);
+    }
+
+    87.5% {
+        transform: rotate(-5deg);
+    }
+
+}
+
+
+.add-icon:hover {
+    animation: 2500ms ease-in-out bobble;
+}
+
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+
+.add-fields {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    height: 4em;
+
+    overflow: hidden;
+
+    border-radius: 40px;
+    padding: 1em;
+
+    background-color: #ffffff;
+
+    transition: all 600ms ease-in-out 100ms;
+}
+
+
+.hide {
+    transform: translate(-100px);
+
+    opacity: 0;
+}
+
+
+.task-input, .priority-input {
+    height: 2em;
+
+    border: 1px solid #2f2f2f;
+    padding: 0;
+}
+
+
+.task-input, .priority-input, .add-button {
+    font-size: 1em;
+}
+
+
+.task-input {
+    padding-left: 0.5em;
+}
+
+
+.priority-input {
+    padding-left: 0.25em;
+}
+
+
+.add-button {
+    margin: 0; 
+    border: none;
+    border-radius: 10px;
+    padding: 0.3em 0.5em;
+
+    background-color: #9AFEAC;
+
+    cursor: pointer;
+}

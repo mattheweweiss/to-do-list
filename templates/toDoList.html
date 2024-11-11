@@ -23,6 +23,26 @@
                 <a><img class="settings-icon" src='..\static\images\settings.png'></a>
             </div>
         </div>
+
+        <div class="to-do-list-container">
+            <div class="add-field">
+                <button class="add-fields-button" type="button" onclick="showFields()">
+                    <img id="add-icon" class="add-icon" src='..\static\images\add.png'>
+                </button>
+                <div id="add-fields" class="add-fields hide">
+                    <input class="task-input" placeholder="Task" required>
+                    <select class="priority-input">
+                        <option value="" disabled selected>Priority</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button class="add-button" type="button">Add</button>
+                </div>
+            </div>
+        </div>
     </body>
 
 </html>
