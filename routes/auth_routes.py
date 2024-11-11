@@ -8,7 +8,7 @@ auth = Blueprint("auth", __name__, template_folder='templates')
 
 
 
-# Route for login page
+# Route to log in
 @auth.route('/login', methods=["POST"])
 def login():
 
@@ -57,7 +57,7 @@ def login():
 
 
 
-# Route for create account page
+# Route to create account
 @auth.route('/create_account', methods=["POST"])
 def create_account():
 
@@ -96,3 +96,14 @@ def create_account():
         
     except:
         return redirect(url_for('to_do_list.create_account'))
+    
+
+
+
+# Route to log out
+@auth.route("/logout", methods=["POST"])
+def logout():
+    # Clears session
+    session.clear()
+
+    return redirect(url_for('to_do_list.homepage'))

@@ -1,0 +1,28 @@
+<!DOCTYPE htmL>
+<html>
+
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href='..\static\css\toDoList.css'>
+    </head>
+
+    <script src="..\static\js\toDoList.js"></script>
+
+    <body>
+        <div class="navbar">
+            <p class="navbar-title">To-do List</p>
+            <ul class="navbar-left">
+                <a class="navbar-link" href="{{ url_for('to_do_list.homepage') }}"><li>Current</li></a>
+                <a class="navbar-link"><li>Completed</li></a>
+            </ul>
+            <div class="navbar-right">
+                <button class="navbar-button" type="button" onclick="logout()">Logout</button>
+                <a><img class="settings-icon" src='..\static\images\settings.png'></a>
+            </div>
+        </div>
+    </body>
+
+</html>
