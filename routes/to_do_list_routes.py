@@ -21,4 +21,4 @@ def login():
 # Route for create account page
 @to_do_list.route('/create_account', methods=['GET'])
 def create_account():
-    return render_template('create_account.html')
+    return render_template('createAccount.html')
