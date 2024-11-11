@@ -10,6 +10,65 @@ schema = os.environ.get("SCHEMA")
 
 
 
+# Gets user tasks
+def get_tasks():
+
+
+    # Initializing result as empty list
+    result = []
+
+
+    # Retrieving user_id
+    user_id = session.get("user_id", None)
+
+
+    # Opens connection and cursor
+    connection = get_connection()
+    cursor = open_cursor(connection)
+
+    
+    # Verifies user is logged in
+    if user_id:
+
+        try:
+
+            # Searches for tasks of specified user
+            select_tasks = f"""
+                SELECT task
+                    ,priority
+                    ,created_time
+                FROM {schema}.tasks AS t
+                JOIN {schema}.user_tasks AS ut
+                    ON t.id = ut.task_id
+                WHERE ut.user_id = {user_id}
+            """
+
+
+            # Searches for tasks
+            cursor.execute(select_tasks)
+
+
+            # Retrieves results
+            result = cursor.fetchall()
+
+
+            connection.commit()
+
+        
+        except Exception as e:
+            print(e)
+            connection.rollback()
+
+        finally:
+            close_cursor(cursor)
+            close_connection(connection)
+
+    
+    return result
+
+
+
+
 # Creates task and stores in database
 def create_task(task, priority = None):
 

@@ -25,7 +25,7 @@
         </div>
 
         <div class="to-do-list-container">
-            <div class="add-field">
+            <div class="add-container">
                 <button class="add-fields-button" type="button" onclick="showFields()">
                     <img id="add-icon" class="add-icon" src='..\static\images\add.png'>
                 </button>
@@ -42,6 +42,27 @@
                     <button class="add-button" type="button" onclick="addTask()">Add</button>
                 </div>
             </div>
+
+            {% if tasks %}
+
+                <div class="tasks-container">
+
+                    {% for task in tasks %}
+                        
+                        <div class="task-container">
+                            <p class="task-info task">{{ task["task"] }}</p>
+                            {% if task["priority"] %}
+                                <p class="task-info task-priority">{{ task["priority"] }}</p>
+                            {% endif %}
+                            <p class="task-info">{{ task["created_time_date"] }}</p>
+                            <p class="task-info">{{ task["created_time_time"] }}</p>
+                        </div>
+
+                    {% endfor %}
+                
+                </div>
+
+            {% endif %}
         </div>
     </body>
 
