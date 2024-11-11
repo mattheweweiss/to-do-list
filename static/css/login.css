@@ -19,11 +19,13 @@ body {
     color: #101935;
 }
 
+
 .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 
 .login-input {
     width: 90%;
@@ -36,6 +38,7 @@ body {
     font-family: inherit;
     color: inherit;
 }
+
 
 .login-button {
     width: 10em;
@@ -53,4 +56,11 @@ body {
     color: inherit;
 
     cursor: pointer;
+}
+
+
+.create-account-field {
+    margin: 1em auto;
+
+    text-align: center;
 }

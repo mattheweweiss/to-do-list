@@ -45,7 +45,7 @@ def login():
         # If result is true, user is authenticated
         if result != "false":
             session["user_id"] = result
-            return redirect(url_for("to_do_list.homepage"))
+            return redirect(url_for('to_do_list.homepage'))
         else:
             return render_template('login.html')
 
@@ -91,8 +91,8 @@ def create_account():
         # Endpoint creates user and user hash and user salt and stores in database
         requests.post(create_account_endpoint, json = user_body)
         
-        return redirect(url_for("to_do_list.homepage"))
+        return redirect(url_for('to_do_list.homepage'))
         
         
     except:
-        return redirect(url_for("to_do_list.create_account"))
+        return redirect(url_for('to_do_list.create_account'))
