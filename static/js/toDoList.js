@@ -62,8 +62,6 @@ async function addTask() {
             "priority": priority
         };
 
-        console.log(body);
-
 
         // Request options for adding task
         const requestOptions = {

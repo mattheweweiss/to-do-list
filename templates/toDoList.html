@@ -51,11 +51,12 @@
                         
                         <div class="task-container">
                             <p class="task-info task">{{ task["task"] }}</p>
-                            {% if task["priority"] %}
-                                <p class="task-info task-priority">{{ task["priority"] }}</p>
-                            {% endif %}
-                            <p class="task-info">{{ task["created_time_date"] }}</p>
-                            <p class="task-info">{{ task["created_time_time"] }}</p>
+                            <div class="task-right">
+                                {% if task["priority"] %}
+                                    <p class="task-info task-priority">{{ task["priority"] }}</p>
+                                {% endif %}
+                                <p class="task-info">{{ task["created_time_date"] }}</p>
+                            </div>
                         </div>
 
                     {% endfor %}
