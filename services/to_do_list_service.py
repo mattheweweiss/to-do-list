@@ -182,3 +182,47 @@ def create_task_mapping(task_id):
         finally:
             close_cursor(cursor)
             close_connection(connection)
+
+
+
+
+# Updates task by marking complete and setting completion time
+def update_task_complete(task_id):
+
+    
+    # Retrieving user_id
+    user_id = session.get("user_id", None)
+
+
+    # Opens connection and cursor
+    connection = get_connection()
+    cursor = open_cursor(connection)
+
+
+    # Verifies user is logged on
+    if user_id:
+
+        try:
+            # Query to update task
+            update_task_complete = f"""
+                UPDATE {schema}.user_tasks
+                SET completed = 1
+                    ,completed_time = GETDATE()
+                WHERE id = {task_id}
+            """
+
+
+            # Updates task in user_tasks table
+            cursor.execute(update_task_complete)
+
+
+            connection.commit()
+
+        
+        except Exception as e:
+            print(e)
+            connection.rollback()
+
+        finally:
+            close_cursor(cursor)
+            close_connection(connection)

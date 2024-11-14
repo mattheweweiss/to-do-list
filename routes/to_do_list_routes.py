@@ -1,4 +1,4 @@
-from services.to_do_list_service import get_tasks, create_task, create_task_mapping
+from services.to_do_list_service import get_tasks, create_task, create_task_mapping, update_task_complete
 
 from flask import Blueprint, request, render_template, redirect, url_for, session
 import datetime
@@ -92,6 +92,24 @@ def add_task():
     # Inserts task mapping into table
     if task_id > 0:
         create_task_mapping(task_id)
+
+
+    return redirect(url_for('to_do_list.homepage'))
+
+
+
+
+# Route to complete task
+@to_do_list.route('/create_task', methods=["POST"])
+def create_task():
+
+    # Retrieves body of request
+    body = request.get_json()
+    task_id = body["task_id"]
+
+
+    # Updates task to complete in table
+    update_task_complete(task_id)
 
 
     return redirect(url_for('to_do_list.homepage'))
