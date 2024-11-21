@@ -33,11 +33,12 @@ def homepage():
 
                 # Creates dictionary of task information
                 task_dict = {}
-                task_dict["task"] = task[0]
-                if task[1]:
-                    task_dict["priority"] = task[1]
-                task_dict["created_time_date"] = task[2].strftime('%m/%d/%Y')
-                task_dict["created_time_time"] = task[2].strftime('%H:%M:%S')
+                task_dict["task_id"] = task[0]
+                task_dict["task"] = task[1]
+                if task[2]:
+                    task_dict["priority"] = task[2]
+                task_dict["created_time_date"] = task[3].strftime('%m/%d/%Y')
+                task_dict["created_time_time"] = task[3].strftime('%H:%M:%S')
 
 
                 # Adds dictionary to list
@@ -100,12 +101,12 @@ def add_task():
 
 
 # Route to complete task
-@to_do_list.route('/create_task', methods=["POST"])
-def create_task():
+@to_do_list.route('/complete_task', methods=["POST"])
+def complete_task():
 
     # Retrieves body of request
     body = request.get_json()
-    task_id = body["task_id"]
+    task_id = body["taskId"]
 
 
     # Updates task to complete in table

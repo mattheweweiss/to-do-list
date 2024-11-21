@@ -7,6 +7,7 @@ import mysql.connector
 host = os.environ.get("HOST")
 user = os.environ.get("USER")
 password = os.environ.get("PASSWORD")
+database = os.environ.get("DATABASE")
 
 
 # Connects to database and returns connection
@@ -15,7 +16,8 @@ def get_connection():
     return mysql.connector.connect(
         host=host,
         user=user,
-        password=password
+        password=password,
+        database=database
     )
 
 

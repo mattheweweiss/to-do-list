@@ -34,13 +34,15 @@ def get_tasks():
 
             # Searches for tasks of specified user
             select_tasks = f"""
-                SELECT task
+                SELECT task_id
+                    ,task
                     ,priority
                     ,created_time
                 FROM {schema}.tasks AS t
                 JOIN {schema}.user_tasks AS ut
                     ON t.id = ut.task_id
                 WHERE ut.user_id = {user_id}
+                    AND t.completed = 0
             """
 
 
@@ -205,9 +207,9 @@ def update_task_complete(task_id):
         try:
             # Query to update task
             update_task_complete = f"""
-                UPDATE {schema}.user_tasks
+                UPDATE {schema}.tasks
                 SET completed = 1
-                    ,completed_time = GETDATE()
+                    ,completed_time = NOW(6)
                 WHERE id = {task_id}
             """
 

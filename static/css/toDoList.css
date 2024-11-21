@@ -246,13 +246,13 @@ body {
 
 .task-right {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+}
 
-    position: relative;
 
+.task-right-left {
     text-align: right;
 }
+
 
 
 .task-priority {

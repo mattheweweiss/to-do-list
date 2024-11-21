@@ -52,10 +52,20 @@
                         <div class="task-container">
                             <p class="task-info task">{{ task["task"] }}</p>
                             <div class="task-right">
-                                {% if task["priority"] %}
-                                    <p class="task-info task-priority">{{ task["priority"] }}</p>
-                                {% endif %}
-                                <p class="task-info">{{ task["created_time_date"] }}</p>
+                                <div class="task-right-left">
+                                    
+                                    {% if task["priority"] %}
+                                        <p class="task-info task-priority">{{ task["priority"] }}</p>
+                                    {% endif %}
+                                    <p class="task-info">{{ task["created_time_date"] }}</p>
+                                
+                                </div>
+                                
+                                <div class="task-right-right">
+                                    <div>
+                                        <input class="task-checkbox" type="checkbox" value={{ task["task_id"] }} onclick="checkTask(event)">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
