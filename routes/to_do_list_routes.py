@@ -1,4 +1,4 @@
-from services.to_do_list_service import get_tasks, create_task, create_task_mapping, update_task_complete
+from services.to_do_list_service import get_tasks, get_completed_tasks, create_task, create_task_mapping, update_task_complete
 
 from flask import Blueprint, request, render_template, redirect, url_for, session
 import datetime
@@ -56,6 +56,53 @@ def homepage():
     else:
         return render_template('homepage.html')
 
+
+
+
+# Route for completed tasks page
+@to_do_list.route('/completed', methods=["GET"])
+def completed():
+
+    # Goes to the completed tasks if user is logged in, homepage otherwise
+    if session.get("user_id", None):
+        
+
+        # Gets completed user tasks
+        tasks_list = get_completed_tasks()
+
+
+        if tasks_list:
+
+            # List of dictionary of completed tasks
+            tasks = []
+
+
+            # Formats completed tasks to send to template
+            for task in tasks_list:
+                
+
+                # Creates dictionary of completed task information
+                task_dict = {}
+                task_dict["task_id"] = task[0]
+                task_dict["task"] = task[1]
+                if task[2]:
+                    task_dict["priority"] = task[2]
+                task_dict["created_time_date"] = task[3].strftime("%m/%d/%Y")
+                task_dict["created_time_time"] = task[3].strftime("%H:%M:%S")
+                task_dict["completed_time_date"] = task[4].strftime("%m/%d/%Y")
+                task_dict["completed_time_time"] = task[4].strftime("%H:%M:%S")
+
+
+                # Adds dictionary to list
+                tasks.append(task_dict)
+
+
+            # Renders to-do list template with tasks
+            return render_template('completed.html', tasks = tasks)
+
+
+    else:
+        return render_template('homepage.html')
 
 
 

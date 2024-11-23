@@ -26,44 +26,100 @@ def get_tasks():
     connection = get_connection()
     cursor = open_cursor(connection)
 
+
+    try:
+
+        # Searches for tasks of specified user
+        select_tasks = f"""
+            SELECT task_id
+                ,task
+                ,priority
+                ,created_time
+            FROM {schema}.tasks AS t
+            JOIN {schema}.user_tasks AS ut
+                ON t.id = ut.task_id
+            WHERE ut.user_id = {user_id}
+                AND t.completed = 0
+        """
+
+
+        # Searches for tasks
+        cursor.execute(select_tasks)
+
+
+        # Retrieves results
+        result = cursor.fetchall()
+
+
+        connection.commit()
+
     
-    # Verifies user is logged in
-    if user_id:
+    except Exception as e:
+        print(e)
+        connection.rollback()
 
-        try:
+    finally:
+        close_cursor(cursor)
+        close_connection(connection)
 
-            # Searches for tasks of specified user
-            select_tasks = f"""
-                SELECT task_id
-                    ,task
-                    ,priority
-                    ,created_time
-                FROM {schema}.tasks AS t
-                JOIN {schema}.user_tasks AS ut
-                    ON t.id = ut.task_id
-                WHERE ut.user_id = {user_id}
-                    AND t.completed = 0
-            """
+    
+    return result
 
 
-            # Searches for tasks
-            cursor.execute(select_tasks)
 
 
-            # Retrieves results
-            result = cursor.fetchall()
+# Gets completed user tasks
+def get_completed_tasks():
 
 
-            connection.commit()
+    # Initializing result as empty list
+    result = []
 
-        
-        except Exception as e:
-            print(e)
-            connection.rollback()
 
-        finally:
-            close_cursor(cursor)
-            close_connection(connection)
+    # Retrieving user_id
+    user_id = session.get("user_id", None)
+
+
+    # Opens connection and cursor
+    connection = get_connection()
+    cursor = open_cursor(connection)
+
+
+    try:
+
+        # Searches for tasks of specified user
+        select_tasks = f"""
+            SELECT task_id
+                ,task
+                ,priority
+                ,created_time
+                ,completed_time
+            FROM {schema}.tasks AS t
+            JOIN {schema}.user_tasks AS ut
+                ON t.id = ut.task_id
+            WHERE ut.user_id = {user_id}
+                AND t.completed = 1
+        """
+
+
+        # Searches for tasks
+        cursor.execute(select_tasks)
+
+
+        # Retrieves results
+        result = cursor.fetchall()
+
+
+        connection.commit()
+
+    
+    except Exception as e:
+        print(e)
+        connection.rollback()
+
+    finally:
+        close_cursor(cursor)
+        close_connection(connection)
 
     
     return result

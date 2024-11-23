@@ -9,7 +9,7 @@
         <link rel="stylesheet" href='..\static\css\toDoList.css'>
     </head>
 
-    <script src="..\static\js\toDoList.js"></script>
+    <script src="..\static\js\completed.js"></script>
 
     <body>
         <div class="navbar">
@@ -20,28 +20,11 @@
             </ul>
             <div class="navbar-right">
                 <button class="navbar-button" type="button" onclick="logout()">Logout</button>
-                <a><img class="settings-icon" src='..\static\images\settings.png'></a>
+                <a><img class="settings-icon" src="..\static\images\settings.png"></a>
             </div>
         </div>
 
         <div class="to-do-list-container">
-            <div class="add-container">
-                <button class="add-fields-button" type="button" onclick="showFields()">
-                    <img id="add-icon" class="add-icon" src='..\static\images\add.png'>
-                </button>
-                <div id="add-fields" class="add-fields hide">
-                    <input id="task-input" class="task-input" placeholder="Task" required>
-                    <select id="priority-input" class="priority-input">
-                        <option value="" disabled selected>Priority</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <button class="add-button" type="button" onclick="addTask()">Add</button>
-                </div>
-            </div>
 
             {% if tasks %}
 
@@ -62,9 +45,7 @@
                                 </div>
                                 
                                 <div class="task-right-right">
-                                    <div>
-                                        <input class="task-checkbox" type="checkbox" value={{ task["task_id"] }} onclick="checkTask(event)">
-                                    </div>
+                                    <p class="task-info">{{ task["completed_time_date"] }}</p>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +55,7 @@
                 </div>
 
             {% endif %}
+
         </div>
     </body>
 
