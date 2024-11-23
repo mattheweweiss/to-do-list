@@ -1,80 +1,63 @@
-<!DOCTYPE htmL>
-<html>
+{% extends "navbar.html" %}
 
-    <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+{% block to_do_list %}
 
-        <link rel="stylesheet" href='..\static\css\toDoList.css'>
-    </head>
+<head>
+    <link rel="stylesheet" href='..\static\css\toDoList.css'>
+</head>
 
-    <script src="..\static\js\toDoList.js"></script>
+<script src="..\static\js\toDoList.js"></script>
 
-    <body>
-        <div class="navbar">
-            <p class="navbar-title">To-do List</p>
-            <ul class="navbar-left">
-                <a class="navbar-link" href="{{ url_for('to_do_list.homepage') }}"><li>Current</li></a>
-                <a class="navbar-link" href="{{ url_for('to_do_list.completed')}}"><li>Completed</li></a>
-            </ul>
-            <div class="navbar-right">
-                <button class="navbar-button" type="button" onclick="logout()">Logout</button>
-                <a><img class="settings-icon" src='..\static\images\settings.png'></a>
-            </div>
+<div class="to-do-list-container">
+    <div class="add-container">
+        <button class="add-fields-button" type="button" onclick="showFields()">
+            <img id="add-icon" class="add-icon" src='..\static\images\add.png'>
+        </button>
+        <div id="add-fields" class="add-fields hide">
+            <input id="task-input" class="task-input" placeholder="Task" required>
+            <select id="priority-input" class="priority-input">
+                <option value="" disabled selected>Priority</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button class="add-button" type="button" onclick="addTask()">Add</button>
         </div>
+    </div>
 
-        <div class="to-do-list-container">
-            <div class="add-container">
-                <button class="add-fields-button" type="button" onclick="showFields()">
-                    <img id="add-icon" class="add-icon" src='..\static\images\add.png'>
-                </button>
-                <div id="add-fields" class="add-fields hide">
-                    <input id="task-input" class="task-input" placeholder="Task" required>
-                    <select id="priority-input" class="priority-input">
-                        <option value="" disabled selected>Priority</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <button class="add-button" type="button" onclick="addTask()">Add</button>
-                </div>
-            </div>
+    {% if tasks %}
 
-            {% if tasks %}
+        <div class="tasks-container">
 
-                <div class="tasks-container">
-
-                    {% for task in tasks %}
+            {% for task in tasks %}
+                
+                <div class="task-container">
+                    <p class="task-info task">{{ task["task"] }}</p>
+                    <div class="task-right">
+                        <div class="task-right-left">
+                            
+                            {% if task["priority"] %}
+                                <p class="task-info task-priority">{{ task["priority"] }}</p>
+                            {% endif %}
+                            <p class="task-info">{{ task["created_time_date"] }}</p>
                         
-                        <div class="task-container">
-                            <p class="task-info task">{{ task["task"] }}</p>
-                            <div class="task-right">
-                                <div class="task-right-left">
-                                    
-                                    {% if task["priority"] %}
-                                        <p class="task-info task-priority">{{ task["priority"] }}</p>
-                                    {% endif %}
-                                    <p class="task-info">{{ task["created_time_date"] }}</p>
-                                
-                                </div>
-                                
-                                <div class="task-right-right">
-                                    <div>
-                                        <input class="task-checkbox" type="checkbox" value={{ task["task_id"] }} onclick="checkTask(event)">
-                                    </div>
-                                </div>
+                        </div>
+                        
+                        <div class="task-right-right">
+                            <div>
+                                <input class="task-checkbox" type="checkbox" value={{ task["task_id"] }} onclick="checkTask(event)">
                             </div>
                         </div>
-
-                    {% endfor %}
-                
+                    </div>
                 </div>
 
-            {% endif %}
+            {% endfor %}
+        
         </div>
-    </body>
 
-</html>
+    {% endif %}
+</div>
+
+{% endblock %}
