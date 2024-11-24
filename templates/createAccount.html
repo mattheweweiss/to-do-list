@@ -9,6 +9,7 @@
         <link rel="stylesheet" href='..\static\css\createAccount.css'>
     </head>
 
+    <script src="..\static\js\passwordCharacters.js"></script>
     <script src="..\static\js\createAccount.js"></script>
 
     <body>
@@ -18,8 +19,8 @@
                 <input class="create-account-input" name="first-name" placeholder="First name" required>
                 <input class="create-account-input" name="last-name" placeholder="Last name" required>
                 <input class="create-account-input" name="email" placeholder="Email address" required>
-                <input id="create-account-password" class="create-account-input" type="password" name="password" placeholder="Password" onchange="checkPasswordsMatch()" required>
-                <input id="create-account-confirm-password" class="create-account-input" type="password" placeholder="Confirm password" onchange="checkPasswordsMatch()" required>
+                <input id="create-account-password" class="create-account-input" type="password" name="password" placeholder="Password" onkeydown="stopBadCharacter(event)" onchange="checkPasswordsMatch()" required>
+                <input id="create-account-confirm-password" class="create-account-input" type="password" placeholder="Confirm password" onkeydown="stopBadCharacter(event)" onchange="checkPasswordsMatch()" required>
                 <button class="create-account-button" type="submit">Create account</button>
             </form>
         </div>

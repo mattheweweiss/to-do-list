@@ -1,3 +1,22 @@
+// Disallows use of certain characters
+// Allowed characters are a-z, A-Z, 0-9, !, @, #, $, &, *, ?
+function stopBadCharacter(event) {
+
+    // Prevents bad character from being added to password
+    if (!passwordCharacters.includes(event.key)) {
+        event.preventDefault();
+
+        // In Internet Explorer
+        return false;
+    }
+
+    return true;
+
+}
+
+
+
+
 // Prevents form from being submitted
 function preventFormSubmission(event) {
     event.preventDefault();
