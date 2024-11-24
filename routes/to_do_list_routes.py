@@ -99,6 +99,10 @@ def completed():
 
             # Renders to-do list template with tasks
             return render_template('completed.html', tasks = tasks)
+        
+        
+        else:
+            return render_template('completed.html')
 
 
     else:
