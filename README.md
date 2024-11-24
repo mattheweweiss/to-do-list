@@ -4,7 +4,7 @@ To-do list Flask application
 
 ## Accessing
 
-Currently, the application is not being hosted. In order to access the app, you need to install and run it while locally hosting a mysql database with identical tables.
+Currently, the application is not being hosted. In order to access the app, you need to install and run it while locally hosting a MySQL database with identical tables.
 
 ## Installation
 
