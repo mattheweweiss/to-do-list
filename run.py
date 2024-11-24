@@ -19,4 +19,4 @@ app.register_blueprint(auth)
 app.register_blueprint(to_do_list)
 
 
-app.run(host='0.0.0.0', port=port, debug=True)
+app.run(host='0.0.0.0', port=port)
