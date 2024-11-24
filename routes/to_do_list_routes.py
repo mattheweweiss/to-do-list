@@ -129,7 +129,7 @@ def add_task():
     # Retrieves body of request
     body = request.get_json()
     task = body["task"].replace("'", "''")
-    priority = body["priority"]
+    priority = int(body["priority"])
 
 
     # Inserts task into table
@@ -153,7 +153,7 @@ def complete_task():
 
     # Retrieves body of request
     body = request.get_json()
-    task_id = body["taskId"]
+    task_id = int(body["taskId"])
 
 
     # Updates task to complete in table

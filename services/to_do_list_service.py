@@ -35,16 +35,16 @@ def get_tasks():
                 ,task
                 ,priority
                 ,created_time
-            FROM {schema}.tasks AS t
-            JOIN {schema}.user_tasks AS ut
+            FROM to_do_list.tasks AS t
+            JOIN to_do_list.user_tasks AS ut
                 ON t.id = ut.task_id
-            WHERE ut.user_id = {user_id}
+            WHERE ut.user_id = %s
                 AND t.completed = 0
         """
 
 
         # Searches for tasks
-        cursor.execute(select_tasks)
+        cursor.execute(select_tasks, (user_id, ))
 
 
         # Retrieves results
@@ -97,13 +97,13 @@ def get_completed_tasks():
             FROM {schema}.tasks AS t
             JOIN {schema}.user_tasks AS ut
                 ON t.id = ut.task_id
-            WHERE ut.user_id = {user_id}
+            WHERE ut.user_id = %s
                 AND t.completed = 1
         """
 
 
         # Searches for tasks
-        cursor.execute(select_tasks)
+        cursor.execute(select_tasks, (user_id, ))
 
 
         # Retrieves results
@@ -153,11 +153,15 @@ def create_task(task, priority = None):
                         ,priority
                         ,created_time
                     ) VALUES (
-                        '{task}'
-                        ,{priority}
+                        %s
+                        ,%s
                         ,NOW(6)
                     )
                 """
+
+                # Inserts task into tasks table
+                cursor.execute(insert_task, (task, priority))
+
 
             else:
                 # Query to insert task
@@ -166,14 +170,14 @@ def create_task(task, priority = None):
                         task
                         ,created_time
                     ) VALUES (
-                        '{task}'
+                        %s
                         ,NOW(6)
                     )
                 """
 
+                # Inserts task into tasks table
+                cursor.execute(insert_task, (task, ))
 
-            # Inserts task into tasks table
-            cursor.execute(insert_task)
 
 
             # Retrieves id of inserted task
@@ -220,14 +224,14 @@ def create_task_mapping(task_id):
                     user_id
                     ,task_id
                 ) VALUES (
-                    {user_id}
-                    ,{task_id}
+                    %s
+                    ,%s
                 )
             """
 
 
             # Inserts task mapping into user_tasks table
-            cursor.execute(insert_task_mapping)
+            cursor.execute(insert_task_mapping, (user_id, task_id))
 
 
             connection.commit()
@@ -266,12 +270,12 @@ def update_task_complete(task_id):
                 UPDATE {schema}.tasks
                 SET completed = 1
                     ,completed_time = NOW(6)
-                WHERE id = {task_id}
+                WHERE id = &s
             """
 
 
             # Updates task in user_tasks table
-            cursor.execute(update_task_complete)
+            cursor.execute(update_task_complete, (task_id, ))
 
 
             connection.commit()

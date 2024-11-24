@@ -44,7 +44,7 @@ def login():
 
         # If result is true, user is authenticated
         if result != "false":
-            session["user_id"] = result
+            session["user_id"] = int(result)
             return redirect(url_for('to_do_list.homepage'))
         else:
             return render_template('login.html')
